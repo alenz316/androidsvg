@@ -4,13 +4,74 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class DemoRenderer extends AppCompatActivity {
+
+    RenderView mRenderView;
+
+    private static float ZOOM_IN = 0.75f;
+    private static float ZOOM_OUT = 1f/0.75f;
+    private static float TRANSLATE = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_renderer);
+
+        mRenderView = (RenderView) findViewById(R.id.svg_renderer);
+
+        Button button = (Button) findViewById(R.id.zoom_in_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderView.scale(ZOOM_IN);
+            }
+        });
+
+        button = (Button) findViewById(R.id.zoom_out_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderView.scale(ZOOM_OUT);
+            }
+        });
+
+
+        button = (Button) findViewById(R.id.up_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderView.translateY(TRANSLATE);
+            }
+        });
+
+        button = (Button) findViewById(R.id.down_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderView.translateY(-TRANSLATE);
+            }
+        });
+
+        button = (Button) findViewById(R.id.left_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderView.translateX(TRANSLATE);
+            }
+        });
+
+        button = (Button) findViewById(R.id.right_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderView.translateX(-TRANSLATE);
+            }
+        });
+
+
     }
 
     @Override
